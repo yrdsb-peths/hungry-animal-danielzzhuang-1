@@ -7,24 +7,22 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @version (a version number or a date)
  */
 
-public class skill extends Actor
+public class Button extends Actor
 {
     GreenfootImage[] playerSkill_idle = new GreenfootImage[2];
-    public int skillNum;
+    public int buttonNum;
     public int id=0;
-    public boolean ifOldSkill;
+    public boolean ifOldButton;
     
-    
-    MouseInfo mi = Greenfoot.getMouseInfo();
     
     
     /**
      * Act - do whatever the atk_c1 wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    public skill(int id, boolean ifOldSkill){
+    public Button(int id, boolean ifOldButton){
         this.id=id;
-        this.ifOldSkill=ifOldSkill;
+        this.ifOldButton=ifOldButton;
     }
     /*
     public void setSkillNum(int skillNum){
@@ -41,8 +39,8 @@ public class skill extends Actor
     public int getId(){
         return id;
     }
-    public boolean getIfOldSkill(){
-        return ifOldSkill;
+    public boolean getIfOldButton(){
+        return ifOldButton;
     }
     /*
     public void show(){
@@ -63,8 +61,7 @@ public class skill extends Actor
         
         MyWorld world = (MyWorld) getWorld();
         if(Greenfoot.mouseClicked(this)){
-            world.skillSelect(ifOldSkill, this.getX(), this.getY());
-            world.showText(String.valueOf(this.getY()), 550, 300);
+            world.callLayout(ifOldButton, this.getX(), this.getY());
         }
         //set image and size 
         

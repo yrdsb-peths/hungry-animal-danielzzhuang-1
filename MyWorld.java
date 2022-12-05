@@ -8,11 +8,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class MyWorld extends World
 {
-    public skillC[] skillSelectArr=new skillC[2];
-    public skill[] oldSkillArr=new skill[2];
-    public skill[] newSkillArr=new skill[2];
-    public int oldSkillId=-1;
-    public int newSkillId=-1;
+    public ButtonLayout[] LayoutArr=new ButtonLayout[2];
+    public Button[] oldButtonArr=new Button[2];
+    public Button[] newButtonArr=new Button[2];
     
     public boolean e=true;
     public boolean fixed=false;
@@ -26,20 +24,20 @@ public class MyWorld extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(900, 600, 1, false); 
         
-        for(int i=0; i<oldSkillArr.length; i++){
-            oldSkillArr[i]= new skill(i, true);
-            addObject(oldSkillArr[i], 175, 100*(i+1));
+        for(int i=0; i<oldButtonArr.length; i++){
+            oldButtonArr[i]= new Button(i, true);
+            addObject(oldButtonArr[i], 175, 100*(i+1));
         }
         
-        for(int j=0; j<newSkillArr.length; j++){
-            newSkillArr[j]= new skill(j, false);
-            addObject(newSkillArr[j], 500, 100*(j+1));
+        for(int j=0; j<newButtonArr.length; j++){
+            newButtonArr[j]= new Button(j, false);
+            addObject(newButtonArr[j], 500, 100*(j+1));
         }
         
         //0 for old, 1 for new
-        for(int i=0; i<skillSelectArr.length; i++){
-            skillSelectArr[i]= new skillC();
-            addObject(skillSelectArr[i], 1000, 1000);
+        for(int i=0; i<LayoutArr.length; i++){
+            LayoutArr[i]= new ButtonLayout();
+            addObject(LayoutArr[i], 1000, 1000);
         }
     }
     /*
@@ -47,12 +45,12 @@ public class MyWorld extends World
         return oldSkillId;
     }
     */
-    public void skillSelect(boolean oldSkill, int x, int y){
+    public void callLayout(boolean oldSkill, int x, int y){
         if(oldSkill){
-            skillSelectArr[0].setLocation(x, y);
+            LayoutArr[0].setLocation(x, y);
         }
         else if(!oldSkill){
-            skillSelectArr[1].setLocation(x, y);
+            LayoutArr[1].setLocation(x, y);
         }
     }
     /*
@@ -62,8 +60,5 @@ public class MyWorld extends World
     */
     public void act(){
         
-        if(skillSelectArr[0].getY()==100){
-            showText("run", 450, 300);
-        }
     }
 }
