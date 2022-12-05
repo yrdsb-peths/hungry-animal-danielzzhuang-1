@@ -11,17 +11,20 @@ public class skill extends Actor
 {
     GreenfootImage[] playerSkill_idle = new GreenfootImage[2];
     public int skillNum;
-    public int identificationNum=0;
+    public int id=0;
+    public boolean ifOldSkill;
+    
     
     MouseInfo mi = Greenfoot.getMouseInfo();
-    MyWorld world = (MyWorld) getWorld();
+    
     
     /**
      * Act - do whatever the atk_c1 wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    public skill(int identificationNum){
-        this.identificationNum=identificationNum;
+    public skill(int id, boolean ifOldSkill){
+        this.id=id;
+        this.ifOldSkill=ifOldSkill;
     }
     /*
     public void setSkillNum(int skillNum){
@@ -32,10 +35,15 @@ public class skill extends Actor
         return skillNum;
     }
     */
-    public void setIdentificationNum(int identificationNum){
-        this.identificationNum=identificationNum;
+    public void setId(int id){
+        this.id=id;
     }
-    
+    public int getId(){
+        return id;
+    }
+    public boolean getIfOldSkill(){
+        return ifOldSkill;
+    }
     /*
     public void show(){
         setLocation(450, 50+skillNum*100);
@@ -45,21 +53,20 @@ public class skill extends Actor
     public void hide(){
         setLocation(450, 1000);
     }
-    
-    
     //images/gameSkill_idle/playerSkill
     public void act(){
         //test 
-        if(Greenfoot.mouseClicked(this)){
-            world.setSkillSelect(identificationNum);
-            if(world.getSkillSelectNum() == this.identificationNum){
-                world.skillSelect(getX(), getY());
-            }
-        }
         
+        playerSkill_idle[id] = new GreenfootImage("images/gameSkill_idle/playerSkill_"+id+".png");
+        setImage(playerSkill_idle[id]);
+        playerSkill_idle[id].scale(300, 300);
+        
+        MyWorld world = (MyWorld) getWorld();
+        if(Greenfoot.mouseClicked(this)){
+            world.skillSelect(ifOldSkill, this.getX(), this.getY());
+            world.showText(String.valueOf(this.getY()), 550, 300);
+        }
         //set image and size 
-        playerSkill_idle[identificationNum] = new GreenfootImage("images/gameSkill_idle/playerSkill_"+identificationNum+".png");
-        setImage(playerSkill_idle[identificationNum]);
-        playerSkill_idle[identificationNum].scale(300, 300);
+        
     }
 }

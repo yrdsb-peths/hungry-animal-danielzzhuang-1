@@ -1,15 +1,19 @@
 #BlueJ class context
 comment0.target=skill
 comment0.text=b\r\n\ Write\ a\ description\ of\ class\ atk_c1\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-comment1.params=identificationNum
-comment1.target=skill(int)
+comment1.params=id\ ifOldSkill
+comment1.target=skill(int,\ boolean)
 comment1.text=\r\n\ Act\ -\ do\ whatever\ the\ atk_c1\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
-comment2.params=identificationNum
-comment2.target=void\ setIdentificationNum(int)
+comment2.params=id
+comment2.target=void\ setId(int)
 comment2.text=\r\n\ \ \ \ public\ void\ setSkillNum(int\ skillNum){\r\n\ \ \ \ \ \ \ \ this.skillNum\=skillNum;\r\n\ \ \ \ }\r\n\ \ \ \ \r\n\ \ \ \ public\ int\ getSkillNum(){\r\n\ \ \ \ \ \ \ \ return\ skillNum;\r\n\ \ \ \ }\r\n
 comment3.params=
-comment3.target=void\ hide()
-comment3.text=\r\n\ \ \ \ public\ void\ show(){\r\n\ \ \ \ \ \ \ \ setLocation(450,\ 50+skillNum*100);\r\n\ \ \ \ \ \ \ \ //y\:150,\ 250,\ 350,\ 450\ \r\n\ \ \ \ }\r\n
+comment3.target=int\ getId()
 comment4.params=
-comment4.target=void\ act()
-numComments=5
+comment4.target=boolean\ getIfOldSkill()
+comment5.params=
+comment5.target=void\ hide()
+comment5.text=\r\n\ \ \ \ public\ void\ show(){\r\n\ \ \ \ \ \ \ \ setLocation(450,\ 50+skillNum*100);\r\n\ \ \ \ \ \ \ \ //y\:150,\ 250,\ 350,\ 450\ \r\n\ \ \ \ }\r\n
+comment6.params=
+comment6.target=void\ act()
+numComments=7

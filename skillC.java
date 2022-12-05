@@ -18,7 +18,4 @@ public class skillC extends Actor
         image.scale(300, 300);
         setImage(image);
     }
-    public void skillSelected(int x, int y){
-        setLocation(x,y);
-    }
 }
