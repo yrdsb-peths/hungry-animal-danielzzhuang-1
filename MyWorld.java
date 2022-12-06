@@ -9,8 +9,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class MyWorld extends World
 {
     public ButtonLayout[] LayoutArr=new ButtonLayout[2];
-    public Button[] oldButtonArr=new Button[2];
-    public Button[] newButtonArr=new Button[2];
+    public Button[] oldButtonArr=new Button[1];
+    public Button[] newButtonArr=new Button[1];
     
     public boolean e=true;
     public boolean fixed=false;
