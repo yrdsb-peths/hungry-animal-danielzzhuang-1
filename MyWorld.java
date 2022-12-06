@@ -10,6 +10,7 @@ public class MyWorld extends World
 {
     public int score=0;
     Label scoreLabel;
+    Apple apple = new Apple();
     /**
      * Constructor for objects of class MyWorld.
      * 
@@ -23,7 +24,8 @@ public class MyWorld extends World
         backGround bg =new backGround();
         addObject(bg, 200, 200);
         prepare();
-        spawnApple();
+        
+        
         
         scoreLabel = new Label(score, 80);
         addObject(scoreLabel, 50, 50);
@@ -44,7 +46,7 @@ public class MyWorld extends World
     }
     
      public void spawnApple(){
-        Apple apple = new Apple();
+        
         int x = Greenfoot.getRandomNumber(600);
         int y = 0;
         addObject(apple, x, y);
@@ -53,5 +55,12 @@ public class MyWorld extends World
     public void increaseScore(){
         score++;
         scoreLabel.setValue(score);
+    }
+    
+    public void act(){
+        spawnApple();
+        if(apple.getY()>350){
+            gameOver();
+        }
     }
 }
