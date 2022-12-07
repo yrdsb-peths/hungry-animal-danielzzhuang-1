@@ -9,10 +9,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public class Button extends Actor
 {
-    GreenfootImage[] playerSkill_idle = new GreenfootImage[2];
+    GreenfootImage[] playerSkill_idle = new GreenfootImage[12];
     public int buttonNum;
-    public int id=0;
+    public int id;
     public boolean ifOldButton;
+    public boolean ifPressed=false;
     
     
     
@@ -42,6 +43,12 @@ public class Button extends Actor
     public boolean getIfOldButton(){
         return ifOldButton;
     }
+    public boolean ifSelected(){
+        return ifPressed;
+    }
+    public void resetSelected(){
+        ifPressed=false;
+    }
     /*
     public void show(){
         setLocation(450, 50+skillNum*100);
@@ -54,14 +61,20 @@ public class Button extends Actor
     //images/gameSkill_idle/playerSkill
     public void act(){
         //test 
-        
-        playerSkill_idle[id] = new GreenfootImage("images/gameSkill_idle/playerSkill_"+id+".png");
-        setImage(playerSkill_idle[id]);
-        playerSkill_idle[id].scale(300, 300);
-        
         MyWorld world = (MyWorld) getWorld();
         if(Greenfoot.mouseClicked(this)){
-            world.callLayout(ifOldButton, this.getX(), this.getY());
+            world.cancelSelect(ifOldButton);
+            ifPressed=true;
+        }
+        if(ifPressed){
+            playerSkill_idle[id] = new GreenfootImage("images/gameSkill_idle/playerSkill_"+(id+0.1)+".png");
+            setImage(playerSkill_idle[id]);
+            playerSkill_idle[id].scale(300, 300);
+        }
+        else if(!ifPressed){
+            playerSkill_idle[id] = new GreenfootImage("images/gameSkill_idle/playerSkill_"+id+".png");
+            setImage(playerSkill_idle[id]);
+            playerSkill_idle[id].scale(300, 300);
         }
         //set image and size 
         

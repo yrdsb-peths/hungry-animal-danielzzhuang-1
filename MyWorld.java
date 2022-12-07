@@ -8,11 +8,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class MyWorld extends World
 {
-    public ButtonLayout[] LayoutArr=new ButtonLayout[2];
-    public Button[] oldButtonArr=new Button[1];
-    public Button[] newButtonArr=new Button[1];
+    public Button[] oldButtonArr=new Button[3];
+    public Button[] newButtonArr=new Button[3];
     public ConfirmButton cButton;
-    
+    public int temp;
     public boolean e=true;
     public boolean fixed=false;
     
@@ -26,49 +25,59 @@ public class MyWorld extends World
         super(900, 600, 1, false); 
         
         for(int i=0; i<oldButtonArr.length; i++){
-            oldButtonArr[i]= new Button(i, true);
+            oldButtonArr[i]= new Button(i+1, true);
             addObject(oldButtonArr[i], 175, 100*(i+1));
         }
         
         for(int j=0; j<newButtonArr.length; j++){
-            newButtonArr[j]= new Button(1, false);
+            newButtonArr[j]= new Button(j+4, false);
             addObject(newButtonArr[j], 500, 100*(j+1));
         }
         //0 for old, 1 for new
-        for(int i=0; i<LayoutArr.length; i++){
-            LayoutArr[i]= new ButtonLayout();
-            addObject(LayoutArr[i], 1000, 1000);
-        }
         
         cButton = new ConfirmButton();
-        addObject(cButton, 300, 300);
+        addObject(cButton, 300, 450);
     }
     /*
     public int getOldSkillId(int id){
         return oldSkillId;
     }
     */
-    public void callLayout(boolean oldSkill, int x, int y){
-        if(oldSkill){
-            LayoutArr[0].setLocation(x, y);
+    public void cancelSelect(boolean ifOldButton){
+        if(ifOldButton){
+            for(int i=0; i<oldButtonArr.length; i++){
+                oldButtonArr[i].resetSelected();
+            }
         }
-        else if(!oldSkill){
-            LayoutArr[1].setLocation(x, y);
+        else if(!ifOldButton){
+            for(int i=0; i<newButtonArr.length; i++){
+                newButtonArr[i].resetSelected();
+            }
         }
     }
+    public void cancelSelect(){
+        for(int i=0; i<oldButtonArr.length; i++){
+            oldButtonArr[i].resetSelected();
+        }
+        for(int i=0; i<newButtonArr.length; i++){
+            newButtonArr[i].resetSelected();
+        }
+    }
+    
     public void replaceId(){
         for(int i=0; i<oldButtonArr.length; i++){
-            if(LayoutArr[0]. getY()==oldButtonArr[i].getY()){
+            if(oldButtonArr[i].ifSelected()){
                 for(int j=0; j<newButtonArr.length; j++){
-                    if(LayoutArr[1]. getY()==newButtonArr[j].getY() && cButton.getConfirm()){
+                    if(newButtonArr[j].ifSelected() && cButton.getConfirm()){
+                        temp=oldButtonArr[i].getId();
                         oldButtonArr[i].setId(newButtonArr[j].getId());
+                        newButtonArr[j].setId(temp);
+                        cancelSelect();
                         cButton.resetConfirm();
                     }
                 }
             }
         }
-        
-        
     }
     public void act(){
         
