@@ -12,8 +12,6 @@ public class MyWorld extends World
     public Button[] newButtonArr=new Button[3];
     public ConfirmButton cButton;
     public int temp;
-    public boolean e=true;
-    public boolean fixed=false;
     
     /**
      * Constructor for objects of class MyWorld.
@@ -24,13 +22,13 @@ public class MyWorld extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(900, 600, 1, false); 
         
-        for(int i=0; i<oldButtonArr.length; i++){
-            oldButtonArr[i]= new Button(i+1, true);
+        for(int i=oldButtonArr.length-1; i>-1; i--){
+            oldButtonArr[i]= new Button(i, true);
             addObject(oldButtonArr[i], 175, 100*(i+1));
         }
         
-        for(int j=0; j<newButtonArr.length; j++){
-            newButtonArr[j]= new Button(j+4, false);
+        for(int j=newButtonArr.length-1; j>-1; j--){
+            newButtonArr[j]= new Button(j+3, false);
             addObject(newButtonArr[j], 500, 100*(j+1));
         }
         //0 for old, 1 for new

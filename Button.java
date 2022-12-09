@@ -9,9 +9,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public class Button extends Actor
 {
-    GreenfootImage[] playerSkill_idle = new GreenfootImage[12];
-    public int buttonNum;
     public int id;
+    GreenfootImage[] selected = new GreenfootImage[6];
+    GreenfootImage[] deselected = new GreenfootImage[6];
+    public int size=300;    
     public boolean ifOldButton;
     public boolean ifPressed=false;
     
@@ -29,7 +30,7 @@ public class Button extends Actor
     public void setSkillNum(int skillNum){
         this.skillNum=skillNum;
     }
-    
+    j
     public int getSkillNum(){
         return skillNum;
     }
@@ -49,15 +50,6 @@ public class Button extends Actor
     public void resetSelected(){
         ifPressed=false;
     }
-    /*
-    public void show(){
-        setLocation(450, 50+skillNum*100);
-        //y:150, 250, 350, 450 
-    }
-    */
-    public void hide(){
-        setLocation(450, 1000);
-    }
     //images/gameSkill_idle/playerSkill
     public void act(){
         //test 
@@ -67,16 +59,16 @@ public class Button extends Actor
             ifPressed=true;
         }
         if(ifPressed){
-            playerSkill_idle[id] = new GreenfootImage("images/gameSkill_idle/playerSkill_"+(id+0.1)+".png");
-            setImage(playerSkill_idle[id]);
-            playerSkill_idle[id].scale(300, 300);
+            deselected[id] = new GreenfootImage("images/playerSkill_deselected/playerSkill_"+id+".png");
+            setImage(deselected[id]);
+            deselected[id].scale(size, size);
         }
         else if(!ifPressed){
-            playerSkill_idle[id] = new GreenfootImage("images/gameSkill_idle/playerSkill_"+id+".png");
-            setImage(playerSkill_idle[id]);
-            playerSkill_idle[id].scale(300, 300);
+            selected[id] = new GreenfootImage("images/playerSkill_selected/playerSkill_"+id+".png");
+            setImage(selected[id]);
+            selected[id].scale(size, size);
         }
-        //set image and size 
+        //set image and siz
         
     }
 }

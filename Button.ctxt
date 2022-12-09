@@ -6,7 +6,7 @@ comment1.target=Button(int,\ boolean)
 comment1.text=\r\n\ Act\ -\ do\ whatever\ the\ atk_c1\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
 comment2.params=id
 comment2.target=void\ setId(int)
-comment2.text=\r\n\ \ \ \ public\ void\ setSkillNum(int\ skillNum){\r\n\ \ \ \ \ \ \ \ this.skillNum\=skillNum;\r\n\ \ \ \ }\r\n\ \ \ \ \r\n\ \ \ \ public\ int\ getSkillNum(){\r\n\ \ \ \ \ \ \ \ return\ skillNum;\r\n\ \ \ \ }\r\n
+comment2.text=\r\n\ \ \ \ public\ void\ setSkillNum(int\ skillNum){\r\n\ \ \ \ \ \ \ \ this.skillNum\=skillNum;\r\n\ \ \ \ }\r\n\ \ \ \ j\r\n\ \ \ \ public\ int\ getSkillNum(){\r\n\ \ \ \ \ \ \ \ return\ skillNum;\r\n\ \ \ \ }\r\n
 comment3.params=
 comment3.target=int\ getId()
 comment4.params=
@@ -16,8 +16,5 @@ comment5.target=boolean\ ifSelected()
 comment6.params=
 comment6.target=void\ resetSelected()
 comment7.params=
-comment7.target=void\ hide()
-comment7.text=\r\n\ \ \ \ public\ void\ show(){\r\n\ \ \ \ \ \ \ \ setLocation(450,\ 50+skillNum*100);\r\n\ \ \ \ \ \ \ \ //y\:150,\ 250,\ 350,\ 450\ \r\n\ \ \ \ }\r\n
-comment8.params=
-comment8.target=void\ act()
-numComments=9
+comment7.target=void\ act()
+numComments=8
