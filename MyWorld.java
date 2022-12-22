@@ -10,6 +10,7 @@ public class MyWorld extends World
 {
     public Button[] oldButtonArr=new Button[3];
     public Button[] newButtonArr=new Button[3];
+    public int[] sArr={1, 2, 3, 4, 5, 6};
     public ConfirmButton cButton;
     public int temp;
     
@@ -61,7 +62,17 @@ public class MyWorld extends World
             newButtonArr[i].resetSelected();
         }
     }
-    
+    public static int[] swapArr(int[] arr){
+        int[] arrS=arr;
+        int temp;
+        for(int i=0; i<arrS.length; i++){
+          int rNum=(int)(Math.random()*5)+1;
+          temp=arrS[i];
+          arrS[i]=arrS[rNum];
+          arrS[rNum]=temp;
+        }
+        return arrS;
+    }
     public void replaceId(){
         for(int i=0; i<oldButtonArr.length; i++){
             if(oldButtonArr[i].ifSelected()){

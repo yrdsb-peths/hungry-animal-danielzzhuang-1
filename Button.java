@@ -61,12 +61,12 @@ public class Button extends Actor
         if(ifPressed){
             deselected[id] = new GreenfootImage("images/playerSkill_deselected/playerSkill_"+id+".png");
             setImage(deselected[id]);
-            deselected[id].scale(size, size);
+            deselected[id].scale(size, 100);
         }
         else if(!ifPressed){
             selected[id] = new GreenfootImage("images/playerSkill_selected/playerSkill_"+id+".png");
             setImage(selected[id]);
-            selected[id].scale(size, size);
+            selected[id].scale(size, 100);
         }
         //set image and siz
         
