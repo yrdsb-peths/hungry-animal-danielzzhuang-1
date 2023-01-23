@@ -1,5 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import java.util.*;
 /**
  * Write a description of class MyWorld here.
  * 
@@ -8,12 +8,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class MyWorld extends World
 {
-    public Button[] oldButtonArr=new Button[3];
-    public Button[] newButtonArr=new Button[3];
-    public int[] sArr={1, 2, 3, 4, 5, 6};
-    public ConfirmButton cButton;
-    public int temp;
+    public ArrayList<Button> oldButtonArr=new ArrayList<Button>();
+    public ArrayList<Button> newButtonArr=new ArrayList<Button>();
+    public ArrayList<Integer> skillArr = new ArrayList<Integer>();
     
+    public ConfirmButton cButton;
+    public int testOne=0;
+    public int temp;
     /**
      * Constructor for objects of class MyWorld.
      * 
@@ -22,73 +23,117 @@ public class MyWorld extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(900, 600, 1, false); 
-        
-        for(int i=oldButtonArr.length-1; i>-1; i--){
-            oldButtonArr[i]= new Button(i, true);
-            addObject(oldButtonArr[i], 175, 100*(i+1));
+        for(int i=0; i<2; i++){
+            oldButtonArr.add(new Button(i, true));
+        }
+        for(int i=0; i<oldButtonArr.size(); i++){
+            addObject(oldButtonArr.get(i), 175, 100*(i+1));
         }
         
-        for(int j=newButtonArr.length-1; j>-1; j--){
-            newButtonArr[j]= new Button(j+3, false);
-            addObject(newButtonArr[j], 500, 100*(j+1));
+       for(int i=0; i<2; i++){
+            newButtonArr.add(new Button(i+2, false));
+        }
+        for(int i=0; i<newButtonArr.size(); i++){
+            addObject(newButtonArr.get(i), 500, 100*(i+1));
         }
         //0 for old, 1 for new
         
+        for(int i=0; i<6; i++){
+            skillArr.add(i);
+        }
         cButton = new ConfirmButton();
         addObject(cButton, 300, 450);
+        
+        
     }
     /*
     public int getOldSkillId(int id){
         return oldSkillId;
     }
     */
+    
     public void cancelSelect(boolean ifOldButton){
         if(ifOldButton){
-            for(int i=0; i<oldButtonArr.length; i++){
-                oldButtonArr[i].resetSelected();
+            for(int i=0; i<oldButtonArr.size(); i++){
+                oldButtonArr.get(i).resetSelected();
             }
         }
         else if(!ifOldButton){
-            for(int i=0; i<newButtonArr.length; i++){
-                newButtonArr[i].resetSelected();
+            for(int i=0; i<newButtonArr.size(); i++){
+                newButtonArr.get(i).resetSelected();
             }
         }
     }
     public void cancelSelect(){
-        for(int i=0; i<oldButtonArr.length; i++){
-            oldButtonArr[i].resetSelected();
+        for(int i=0; i<oldButtonArr.size(); i++){
+            oldButtonArr.get(i).resetSelected();
         }
-        for(int i=0; i<newButtonArr.length; i++){
-            newButtonArr[i].resetSelected();
+        for(int i=0; i<newButtonArr.size(); i++){
+            newButtonArr.get(i).resetSelected();
         }
     }
-    public static int[] swapArr(int[] arr){
-        int[] arrS=arr;
-        int temp;
-        for(int i=0; i<arrS.length; i++){
-          int rNum=(int)(Math.random()*5)+1;
-          temp=arrS[i];
-          arrS[i]=arrS[rNum];
-          arrS[rNum]=temp;
+    public ArrayList<Integer> removeComEle(ArrayList<Button> a, ArrayList<Integer> b){
+        for(int i=0; i<a.size(); i++){
+          for(int j=0; j<b.size(); j++){
+            if(a.get(i).getId()==b.get(j)){
+              b.remove(0);
+            }
+          }
         }
-        return arrS;
+        return b;
+    }
+    public ArrayList<Integer> swapEle(ArrayList<Button> a, ArrayList<Integer> b){
+        for(int i=0; i<a.size(); i++){
+          for(int j=0; j<b.size(); j++){
+            if(a.get(i).getId()!=b.get(j)){
+              b.add(a.get(i).getId());
+            }
+          }
+        }
+        return b;
+    }
+    public ArrayList<Integer> randomArr(ArrayList<Integer> a){
+        for(int i=0; i<a.size(); i++){
+          int rNum=(int)(Math.random()* a.size());
+          Collections.swap(a, i, rNum);
+        }
+        return a;
+    
     }
     public void replaceId(){
-        for(int i=0; i<oldButtonArr.length; i++){
-            if(oldButtonArr[i].ifSelected()){
-                for(int j=0; j<newButtonArr.length; j++){
-                    if(newButtonArr[j].ifSelected() && cButton.getConfirm()){
-                        temp=oldButtonArr[i].getId();
-                        oldButtonArr[i].setId(newButtonArr[j].getId());
-                        newButtonArr[j].setId(temp);
+        for(int i=0; i<oldButtonArr.size(); i++){
+            if(oldButtonArr.get(i).ifSelected()){
+                for(int j=0; j<newButtonArr.size(); j++){
+                    if(newButtonArr.get(j).ifSelected() && cButton.getConfirm()){
+                        temp=oldButtonArr.get(i).getId();
+                        oldButtonArr.get(i).setId(newButtonArr.get(j).getId());
+                        newButtonArr.get(j).setId(temp);
                         cancelSelect();
                         cButton.resetConfirm();
+                        testOne=0;
                     }
                 }
             }
         }
     }
+    public void learnNewSkill(){
+        if(testOne==0){
+            removeComEle(oldButtonArr, skillArr);
+            randomArr(skillArr); 
+            for(int i=0; i<newButtonArr.size(); i++){
+                removeComEle(oldButtonArr, skillArr);
+                newButtonArr.get(i).setId(skillArr.get(i));
+            }
+            testOne=1;
+        }
+        if(oldButtonArr.size()==2 && testOne==1){
+            replaceId();
+            if(testOne==0){
+                swapEle(newButtonArr, skillArr);
+            }
+        }
+    }
     public void act(){
-        
+        learnNewSkill();
     }
 }
